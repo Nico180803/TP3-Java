@@ -18,6 +18,8 @@ public class Main {
         int nombreVictoireJ1;
         int nombreVictoireJ2;
         int nombreEgalite;
+        boolean erreurJ1;
+        boolean erreurJ2;
 
         //CODE
 
@@ -47,12 +49,15 @@ public class Main {
             System.out.println(Plateau[1][0] + " " + Plateau[1][1] + " " + Plateau[1][2]);
             System.out.println(Plateau[2][0] + " " + Plateau[2][1] + " " + Plateau[2][2]);
 
+            System.out.println(Joueur1+" , parties gagné : "+nombreVictoireJ1);
+            System.out.println(Joueur2+" , parties gagné : "+nombreVictoireJ2);
+            System.out.println("Nombre d'égalité : "+nombreEgalite);
+
             jouer = true;
             while (jouer == true) {
+                erreurJ2 = true;
+                erreurJ1 = true;
 
-                System.out.println(Joueur1+" , parties gagné : "+nombreVictoireJ1);
-                System.out.println(Joueur2+" , parties gagné : "+nombreVictoireJ2);
-                System.out.println("Nombre d'égalité : "+nombreEgalite);
 
                 //JOUEUR 1
                 if (tour%2==0) {
@@ -60,14 +65,21 @@ public class Main {
                 }else {
                     System.out.println("C'est à " + Joueur2);
                 }
-                System.out.println("Où voulez vous placer votre X ? Entrez le numéro de la ligne puis de la collone");
-                System.out.println("Position de la ligne : ");
-                ligne = sc.nextInt();
-                sc.nextLine();
-                System.out.println("Position de la colonne : ");
-                colonne = sc.nextInt();
-                sc.nextLine();
-                Plateau[ligne - 1][colonne - 1] = "X";
+                do {
+                    System.out.println("Où voulez vous placer votre X ? Entrez le numéro de la ligne puis de la colonne");
+                    System.out.println("Position de la ligne : ");
+                    ligne = sc.nextInt();
+                    sc.nextLine();
+                    System.out.println("Position de la colonne : ");
+                    colonne = sc.nextInt();
+                    sc.nextLine();
+                    if ((Plateau[ligne-1][colonne-1].equals("X") || Plateau[ligne-1][colonne-1].equals("O"))){
+                        System.out.println("Erreur, position déja remplis !");
+                    }else {
+                        Plateau[ligne - 1][colonne - 1] = "X";
+                        erreurJ1 = false;
+                    }
+                }while (erreurJ1==true);
 
                 System.out.println(Plateau[0][0] + " " + Plateau[0][1] + " " + Plateau[0][2]);
                 System.out.println(Plateau[1][0] + " " + Plateau[1][1] + " " + Plateau[1][2]);
@@ -98,15 +110,21 @@ public class Main {
                 }else {
                     System.out.println("C'est à " + Joueur1);
                 }
-                System.out.println("Où voulez vous placer votre O ? Entrez le numéro de la ligne puis de la collone");
-                System.out.println("Position de la ligne : ");
-                ligne = sc.nextInt();
-                sc.nextLine();
-                System.out.println("Position de la colonne : ");
-                colonne = sc.nextInt();
-                sc.nextLine();
-                Plateau[ligne - 1][colonne - 1] = "O";
-
+                do {
+                    System.out.println("Où voulez vous placer votre O ? Entrez le numéro de la ligne puis de la colonne");
+                    System.out.println("Position de la ligne : ");
+                    ligne = sc.nextInt();
+                    sc.nextLine();
+                    System.out.println("Position de la colonne : ");
+                    colonne = sc.nextInt();
+                    sc.nextLine();
+                    if ((Plateau[ligne-1][colonne-1].equals("X") || Plateau[ligne-1][colonne-1].equals("O"))){
+                        System.out.println("Erreur, position déja remplis !");
+                    }else {
+                        Plateau[ligne - 1][colonne - 1] = "O";
+                        erreurJ2 = false;
+                    }
+                }while (erreurJ2==true);
                 System.out.println(Plateau[0][0] + " " + Plateau[0][1] + " " + Plateau[0][2]);
                 System.out.println(Plateau[1][0] + " " + Plateau[1][1] + " " + Plateau[1][2]);
                 System.out.println(Plateau[2][0] + " " + Plateau[2][1] + " " + Plateau[2][2]);
